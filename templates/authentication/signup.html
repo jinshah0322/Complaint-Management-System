@@ -69,8 +69,8 @@
                                         <h4 class="mt-1 mb-5 pb-1" style="font-family:arial;font-weight:700;">Create Your Account</h4>
                                     </div>
 
-                                    <form action="loginlogic.jsp" method="post">
-
+                                    <form  action="/signup" method="post">
+                                        {% csrf_token %}
                                         <div class="form-outline mb-4">
                                             <input type="text" id="form2Example11" class="form-control"
                                                 placeholder="Enter Username" name="Name" required />
@@ -78,19 +78,19 @@
                                         </div>
                                         <div class="form-outline mb-4">
                                             <input type="email" id="form2Example11" class="form-control"
-                                                placeholder="Enter Username" name="Name" required />
+                                                placeholder="Enter Email" name="email" required />
                                             <label class="form-label" for="form2Example11">Email</label>
                                         </div>
 
                                         <div class="form-outline mb-4">
                                             <input type="password" id="form2Example22" class="form-control"
-                                                name="Password" placeholder="Enter Password" required />
+                                                name="password" placeholder="Enter Password" required />
                                             <label class="form-label" for="form2Example22">Password</label>
 
                                         </div>
                                         <div class="form-outline mb-4">
                                             <input type="password" id="form2Example22" class="form-control"
-                                                name="Password" placeholder="Enter Password" required />
+                                                name="confirm_password" placeholder="Confirm Password" required />
                                             <label class="form-label" for="form2Example22">Confirm Password</label>
 
                                         </div>
@@ -98,7 +98,6 @@
 
                                         <button type="submit" class="btn"
                                             style="color: #fff;margin-left:100px;width:130px;background: #2d8b72;">Sign up</button>
-                                        <a href="forget_password.jsp">                                            
                                         </a>    
 
 
