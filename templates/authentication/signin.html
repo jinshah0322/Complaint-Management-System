@@ -20,16 +20,16 @@
         background: none !important;
       }
 
+      body{
+        background: none !important;
+      }
+
       .card {
         box-shadow: none;
       }
 
       .btn-primary:hover {
         color: #000 !important;
-      }
-
-      body {
-        overflow-y: hidden;
       }
 
       .for:hover {
@@ -110,7 +110,9 @@
                           >Password</label
                         >
                       </div>
-
+                      {% for message in messages %}
+				              <p class="messages"><h3>{{message}}</h3></p>
+				              {% endfor %}
                       <button
                         type="submit"
                         class="btn"
