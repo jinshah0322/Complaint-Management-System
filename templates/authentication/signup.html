@@ -71,6 +71,12 @@
 
                                     <form  action="/signup" method="post">
                                         {% csrf_token %}
+                                        {% for message in messages %}
+                                        {%if "validation" in message.tags %}
+                                        <p class="messages"><h1 style="color: tomato !important;
+                                        font-size: 17px !important;">{{message}}</h1></p>
+                                        {%endif%}
+				                        {% endfor %}
                                         <div class="form-outline mb-4">
                                             <input type="text" id="form2Example11" class="form-control"
                                                 placeholder="Enter Username" name="Name" required />
@@ -104,7 +110,7 @@
 
                                         <div class="d-flex pb-4">
                                             <p class="mb-0 me-2" style="margin-top:10px;">Already have an account?</p>
-                                            <a href="/signin" style="margin-top:10px;">Login</a>
+                                            <a href="/" style="margin-top:10px;">Login</a>
                                         </div>
 
                                     </form>
