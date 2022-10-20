@@ -79,9 +79,14 @@
                       >
                         Login To Continue
                       </h4>
+                      {% for message in messages %}
+                        <p class="messages"><h1 style="
+                          font-size: 17px !important;">{{message}}</h1></p>
+				              {% endfor %}
+                      
                     </div>
 
-                    <form action="/signin" method="post">
+                    <form action="/" method="post">
                       {% csrf_token %}
                       <div class="form-outline mb-4">
                         <input
@@ -110,10 +115,7 @@
                           >Password</label
                         >
                       </div>
-                      {% for message in messages %}
-				              <p class="messages"><h1 style="color: tomato !important;
-                        font-size: 17px !important;">{{message}}</h1></p>
-				              {% endfor %}
+                      
                       <button
                         type="submit"
                         class="btn"
