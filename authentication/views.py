@@ -28,7 +28,7 @@ def signin(request):
             login(request,user)
             return redirect('/')
         else:
-            messages.error(request,"Invalid Credentials")
+            messages.info(request,"Invalid Credentials")
             return redirect('/signin')
     return render(request,"authentication/signin.html")
 
