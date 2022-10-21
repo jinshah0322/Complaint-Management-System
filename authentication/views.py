@@ -47,7 +47,7 @@ def signup(request):
         myuser.email=email
         myuser.is_active = False
         myuser.save()
-        messages.success(request,"Your account has been successfully created",extra_tags="valid")
+        messages.success(request,"Your account has been successfully created Check mail to verify.",extra_tags="valid")
 
         #welcome email
         subject = "Welcome to Complaint Management System"
