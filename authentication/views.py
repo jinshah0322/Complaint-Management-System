@@ -14,6 +14,7 @@ from django.utils.encoding import force_bytes, force_text
 from cms.tokens import generate_token
 from django.core.mail import EmailMessage, send_mail
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
+from .forms import *
 
 # Create your views here.
 def home(request):
@@ -87,8 +88,13 @@ def signin(request):
             login(request,user)
             return redirect('/home')
         else:
-            messages.error(request,"Invalid Credentials",extra_tags="invalid")
-            return redirect('/')
+            validate = User.objects.filter(username=Name).exists()  
+            if validate:
+                messages.error(request,"Invalid Password",extra_tags="pass")
+                return redirect('/')
+            else:
+                messages.error(request,"Invalid Username",extra_tags="user")
+                return redirect('/')
     return render(request,"authentication/signin.html")
 
 def signout(request):
@@ -110,3 +116,25 @@ def activate(request, uidb64, token):
         return redirect('/home')
     else:
         return render(request, 'activation_failed.html')
+
+def complaint(request):
+    form = ComplaintForm()
+    if request.method == "POST":
+        form = ComplaintForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # messages.success(request,"Your complaint has been successfully registered",extra_tags="valid")
+            return redirect('/complaint')
+    context={'form':form}
+    return render(request,"authentication/complaint.html",context)
+
+def contactus(request):
+    form = ContactusForm()
+    if request.method == "POST":
+        form = ContactusForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # messages.success(request,"Your message has been successfully sent",extra_tags="valid")
+            return redirect('/contactus')
+    context = {'form':form}
+    return render(request,"authentication/contactus.html",context)
