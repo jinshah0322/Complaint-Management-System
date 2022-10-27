@@ -79,15 +79,23 @@
                       >
                         Login To Continue
                       </h4>
-                      {% for message in messages %}
-                        <p class="messages"><h1 style="
-                          font-size: 17px !important;">{{message}}</h1></p>
-				              {% endfor %}
-                      
                     </div>
+
+                    {% for message in messages %}
+                      {%if "valid" in message.tags %}
+                        <p class="messages"><h1 style="color: green !important;
+                          font-size: 17px !important;text-align:center;">{{message}}</h1></p>
+                      {%endif%}
+				            {% endfor %}
 
                     <form action="/" method="post">
                       {% csrf_token %}
+                      {% for message in messages %}
+                        {%if "user" in message.tags %}
+                          <p class="messages"><h1 style="color: red !important;
+                            font-size: 17px !important;">{{message}}</h1></p>
+                        {%endif%}
+                      {% endfor %}
                       <div class="form-outline mb-4">
                         <input
                           type="text"
@@ -102,6 +110,13 @@
                         >
                       </div>
 
+                      {% for message in messages %}
+                        {%if "pass" in message.tags %}
+                          <p class="messages"><h1 style="color: red !important;
+                            font-size: 17px !important;">{{message}}</h1></p>
+                        {%endif%}
+                      {% endfor %}
+                      
                       <div class="form-outline mb-4">
                         <input
                           type="password"
