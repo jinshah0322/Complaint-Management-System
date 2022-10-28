@@ -1,3 +1,4 @@
+from audioop import add
 from email.message import EmailMessage
 from tokenize import generate_tokens
 from django.shortcuts import redirect, render
@@ -44,7 +45,7 @@ def signup(request):
             return redirect('/signup')
 
         myuser=User.objects.create_user(Name, email, password)
-        myuser.first_name=Name
+        myuser.first_name=Name  
         myuser.email=email
         myuser.is_active = False
         myuser.save()
