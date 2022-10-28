@@ -138,3 +138,6 @@ def contactus(request):
             return redirect('/contactus')
     context = {'form':form}
     return render(request,"authentication/contactus.html",context)
+
+def account(request):
+    return render(request,"authentication/account.html")
