@@ -1,27 +1,26 @@
 @media screen and (min-width:900px) {
-    section form {
-        margin-top: 10vw !important;
-        margin-left: 30vw !important;
-    }
 
-    .radio-form {
-        margin-left: -2vw !important;
-        display: flex;
-    }
 
-    .radio-form input {
-        margin-top: 1vw !important;
-        margin-left: 0.2vw !important;
+    form{
+        margin-left: 33vw !important;
+        color: #000 !important;
     }
-
-    .radio-form label {
-        margin-top: 1vw !important;
+    label{
+        color: #000 !important;
+    }
+    .btn{
+        margin-left: 10vw !important;
+    }
+    .heading{
+        margin-top: -15vw !important;
+        margin-left: 8vw !important;
+        color: #fff !important;
+        font-family: 'Roboto Slab' !important;
     }
 }
 
-body {
-    color: #000 !important;
+.btn{
+    background:#2D8B70 !important;
+    width:150px !important;
 }
-.reset{
-    background: #eee !important;
-}
+

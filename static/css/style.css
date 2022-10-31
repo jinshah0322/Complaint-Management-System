@@ -1,9 +1,8 @@
 .nav-link{
     letter-spacing:1px;
-    color:#000 !important;
 }
 body{
-    font-family: 'Cabin' !important;
+    font-family: 'Nunito' !important;
 }
 
 @media screen and (min-width:900px) {
@@ -12,6 +11,9 @@ body{
         }
     .nav-link{
         margin-left: 2vw !important;
+    }
+    .navbar-brand{
+        margin-right: 200px !important;
     }
     .banner-img img{
         width: 100% !important;
@@ -54,8 +56,14 @@ body{
         color: #000;
         text-align: center !important;
     }
+ 
+
    }
 .banner-home .card .card-title{
     font-weight: 700 !important;
     color: #000 !important;
+}
+
+.nav-link:hover{
+    text-decoration: underline !important;
 }

@@ -22,6 +22,7 @@ def home(request):
     return render(request,"authentication/index.html")
 
 def signup(request):
+    
     if request.method == "POST":
         Name=request.POST['Name']
         email=request.POST['email']
@@ -128,6 +129,12 @@ def complaint(request):
             return redirect('/complaint')
     context={'form':form}
     return render(request,"authentication/complaint.html",context)
+
+def dashboard(request):
+    return render(request,"authentication/dashboard.html")
+
+def dashboard_topic(request):
+    return render(request,"authentication/dashboard_topic.html")
 
 def contactus(request):
     form = ContactusForm()
