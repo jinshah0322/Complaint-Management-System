@@ -56,14 +56,18 @@
         <th><b>Date</b></th>
         <th><b>Status</b></th>
     </thead>
+    {%for p in Complaints%}
     <tr>
         <td>1</td>
-        <td>Water</td>
-        <td>Lorem Ipsum is simply dummy text of the
-            printing and typesetting industry. </td>
-        <td>18-09-2022</td>
-        <td style="color:green;">Completed</td>
+        <td>  {{p.cname}}
+        </td>
+        <td>  {{p.cdescription}}
+        </td>
+        <td>  {{p.date}}
+        </td>
+        <td>{{p.status}}</td>
     </tr>
+    {% endfor %}
 
 </table>
 </body>

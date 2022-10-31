@@ -9,6 +9,7 @@
     {{form}}
     <input type="submit" value="Submit">
 </form> {% endcomment %}
+{{request.session.count}}
 <!DOCTYPE html>
 <html>
 
@@ -55,7 +56,7 @@
             </div>
         </div>
     </nav>
-    <br><br><br>
+    <br><br><br>{{count}}
     <div>
         <img src="../../static/images/banner.webp" style="width:100%;height:250px;">
     </div>
@@ -64,23 +65,24 @@
     <h1><b>Contact Us</b></h1>
 </div>
 <br><br><br><br><br><br><br>
-    <form class="col-md-4">
+    <form class="col-md-4" method="POST" action="{% url 'form' %}">
+        {% csrf_token %}
         <!-- Email input -->
         <div class="form-outline mb-4">
-          <input type="text" id="form1Example1" class="form-control" autocomplete="off" />
+          <input type="text" id="form1Example1" name="name" class="form-control" autocomplete="off" />
           <label class="form-label" for="form1Example1">Your Name</label>
         </div>
         <div class="form-outline mb-4">
-            <input type="number" id="form1Example1" class="form-control" autocomplete="off"/>
+            <input type="number" id="form1Example1" name="number" class="form-control" autocomplete="off"/>
             <label class="form-label" for="form1Example1">Your Phone Number</label>
           </div>
          
           <div class="form-outline mb-4">
-            <input type="email" id="form1Example1" class="form-control" autocomplete="off"/>
+            <input type="email" id="form1Example1" name="mail" class="form-control" autocomplete="off"/>
             <label class="form-label" for="form1Example1">Enter Email</label>
           </div>
           <div class="form-outline mb-4">
-            <input type="mail" id="form1Example1" class="form-control" autocomplete="off"/>
+            <input type="mail" id="form1Example1" name="message" class="form-control" autocomplete="off"/>
             <label class="form-label" for="form1Example1">Enter Message</label>
           </div>
       

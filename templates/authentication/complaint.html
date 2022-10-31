@@ -60,27 +60,29 @@
     <h1><b>File a Complaint</b></h1>
 </div>
 <br><br><br><br><br><br><br>
-    <form class="col-md-4">
+    <form class="col-md-4" method="POST" action="{% url 'complaintform' %}">
+        {% csrf_token %}
+
         <!-- Email input -->
         <div class="form-outline mb-4">
-          <input type="text" id="form1Example1" class="form-control" autocomplete="off" />
+          <input type="text" id="form1Example1" name="cname" class="form-control" autocomplete="off" />
           <label class="form-label" for="form1Example1">Complaint Name</label>
         </div>
         <div class="form-outline mb-4">
-            <input type="number" id="form1Example1" class="form-control" autocomplete="off"/>
+            <input type="text" id="form1Example1" name="cdesc" class="form-control" autocomplete="off"/>
             <label class="form-label" for="form1Example1">Complaint Description</label>
           </div>
             <div class="form-outline mb-4">
                 <label class="form-label" for="form1Example1"><b>Priority Of Complaint</b></label><br>
 
-            <input type="radio" id="html" name="priority" value="high">&nbsp;High&nbsp;&nbsp;
-            <input type="radio" id="html" name="priority" value="moderate">&nbsp;Medium
-&nbsp;&nbsp;            <input type="radio" id="html" name="priority" value="low">&nbsp;Low
+            <input type="radio" id="html" name="priority" value="High">&nbsp;High&nbsp;&nbsp;
+            <input type="radio" id="html" name="priority" value="Moderate">&nbsp;Medium
+&nbsp;&nbsp;            <input type="radio" id="html" name="Priority" value="low">&nbsp;Low
             
 
             </div>
           <div class="form-outline mb-4">
-            <input type="date" id="form1Example1" class="form-control" autocomplete="off"/>
+            <input type="date" id="form1Example1" name="date" class="form-control" autocomplete="off"/>
             <label class="form-label" for="form1Example1">Enter Date</label>
           </div>
       
@@ -88,7 +90,7 @@
         
         <!-- Submit button -->
         <a href="/dashboard/dashboard_topic"> 
-            <button type="button" class="btn btn-primary btn-block">File Complaint</button>
+            <button type="submit" class="btn btn-primary btn-block">File Complaint</button>
         </a>
         <br><br><br><br>
       </form>
