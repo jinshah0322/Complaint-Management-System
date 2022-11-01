@@ -25,15 +25,17 @@
                 <i class="fas fa-bars"></i>
             </button> <a class="navbar-brand" href="/home"
                 style="letter-spacing:0px;margin-left:100px !important;"><img src="../../static/images/logo-nav.png" style="width:50px;height:50px; "></a>
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">                    
-                    <a class="nav-link" href="/home">Home</a>
-                    <a class="nav-link active" href="/dashboard">Dashboard</a>
-                    <a class="nav-link" href="/contactus">Contact Us</a>
-                    <a class="nav-link" href="/account">Account</a>
-                    <a class="nav-link" href="/signout">Logout</a>
-                </ul>
-            </div>
+                {% for i in users %}
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <a class="nav-link" href="/home">Home</a>
+                        <a class="nav-link active" href="/dashboard">Dashboard</a>
+                        <a class="nav-link" href="/contactus">Contact Us</a>
+                        <a class="nav-link" href="{% url 'account' i.id %}">Account</a>
+                        <a class="nav-link" href="/signout">Logout</a>
+                    </ul>
+                </div>
+    {% endfor %}
         </div>
     </nav>
     <br><br><br>

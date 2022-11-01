@@ -140,7 +140,7 @@ def activate(request, uidb64, token):
 
 def home(request):
     user=User.objects.all()
-    context={"user":user}
+    context={"users":user}
     return render(request,"authentication/index.html",context) 
     
     
@@ -159,6 +159,8 @@ def complaint(request):
 
 def dashboard(request):
     context={}
+    user=User.objects.all()
+    context["users"]=user
     context["Water"]=Complaint.objects.filter(name=request.user,cname='Water').count()
     context["Light"]=Complaint.objects.filter(name=request.user,cname='Light').count()
     context["Clean"]=Complaint.objects.filter(name=request.user,cname='Clean').count()
@@ -169,21 +171,29 @@ def dashboard(request):
     
 def dashboard_water(request):
     context={}
+    user=User.objects.all()
+    context["users"]=user
     context["Complaints"]=Complaint.objects.filter(name=request.user,cname='Water')     
     return render(request,"authentication/dashboard_topic.html",context)
 
 def dashboard_light(request):
     context={}
+    user=User.objects.all()
+    context["users"]=user    
     context["Complaints"]=Complaint.objects.filter(name=request.user,cname='Light')        
     return render(request,"authentication/dashboard_topic.html",context)
 
 def dashboard_clean(request):
     context={}
+    user=User.objects.all()
+    context["users"]=user    
     context["Complaints"]=Complaint.objects.filter(name=request.user,cname='Clean')    
     return render(request,"authentication/dashboard_topic.html",context)
 
 def dashboard_other(request):
     context={}
+    user=User.objects.all()
+    context["users"]=user    
     context["Complaints"]=Complaint.objects.filter(name=request.user,cname='Other')    
     return render(request,"authentication/dashboard_topic.html",context)
 
@@ -197,14 +207,14 @@ def contactus(request):
                 # messages.success(request,"Your message has been successfully sent",extra_tags="valid")
                 return redirect('/contactus')
         context = {'form':form}
+        user=User.objects.all()
+        context["users"]=user        
         return render(request,"authentication/contactus.html",context)
    
 def account(request,pk):
         if request.user.is_authenticated:
-            user=User.objects.get(id=pk) 
-            name=user.username
+            name=request.user
             user1=SignupFields.objects.filter(name=name)   
-            print(user1)          
             context={"users":user1}      
             return render(request,"authentication/account.html",context)
         else:
