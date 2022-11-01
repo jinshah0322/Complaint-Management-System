@@ -16,8 +16,9 @@
 </head>
 
 <body>
+  {% for i in users %}
 
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light shadow-0">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
                 data-mdb-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
@@ -25,7 +26,6 @@
                 <i class="fas fa-bars"></i>
             </button> <a class="navbar-brand" href="/home"
                 style="letter-spacing:0px;margin-left:100px !important;"><img src="../../static/images/logo-nav.png" style="width:50px;height:50px; "></a>
-                {% for i in users %}
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <a class="nav-link" href="/home">Home</a>
@@ -35,9 +35,9 @@
                         <a class="nav-link" href="/signout">Logout</a>
                     </ul>
                 </div>
-    {% endfor %}
         </div>
-    </nav>
+    </nav>    {% endfor %}
+
     <br><br><br>
     <div>
         <img src="../../static/images/banner.webp" style="width:100%;height:250px;">

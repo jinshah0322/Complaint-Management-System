@@ -155,6 +155,8 @@ def complaint(request):
                 # messages.success(request,"Your complaint has been successfully registered",extra_tags="valid")
                 return redirect('/complaint')
         context={'form':form}
+        user=User.objects.all()
+        context={"users":user}
         return render(request,"authentication/complaint.html",context)
    
 
@@ -258,13 +260,13 @@ def admin(request):
     context["Remaining_Complaints"]=Complaint.objects.filter().count()-Complaint.objects.filter(status="Rejected").count()-Complaint.objects.filter(status="Accepted").count() 
     return render(request,"authentication/admin.html",context)
 
-def yes(request,pk):
+def yes(pk):
     t = Complaint.objects.get(id=pk)
     t.status = 'Accepted' 
     t.save()
     return redirect("/admins") 
 
-def no(request,pk):
+def no(pk):
     t = Complaint.objects.get(id=pk)
     t.status = 'Rejected' 
     t.save()
