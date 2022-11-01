@@ -23,11 +23,12 @@ from cms.tokens import generate_token
 from django.core.mail import EmailMessage, send_mail
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from .forms import *
-
+from django.contrib.auth.decorators import login_required
+from .decorators import *
 
 # Create your views here.
 
-
+@unauthenticated_user
 def signup(request):
     if request.method == "POST":
         Name=request.POST['Name']
@@ -93,15 +94,15 @@ def signup(request):
 
     return render(request,"authentication/signup.html")
 
-
+@unauthenticated_user
 def signin(request):
     if(request.method=="POST"):
         Name=request.POST['Name']
         password=request.POST['Password']
-        if Name=='admin' and password=='123':
-            return redirect('/admins')
-
         user=authenticate(username=Name,password=password)    
+        if Name=='root' and password=='root':
+            login(request,user)
+            return redirect('/admins')
 
         if user is not None:  
             login(request,user)
@@ -138,12 +139,13 @@ def activate(request, uidb64, token):
     else:
         return render(request, 'activation_failed.html')
 
+@login_required(login_url='signin')
 def home(request):
     user=User.objects.all()
     context={"users":user}
     return render(request,"authentication/index.html",context) 
     
-    
+@login_required(login_url='signin')
 def complaint(request):
         form = ComplaintForm()
         if request.method == "POST":
@@ -156,7 +158,7 @@ def complaint(request):
         return render(request,"authentication/complaint.html",context)
    
 
-
+@login_required(login_url='signin')
 def dashboard(request):
     context={}
     user=User.objects.all()
@@ -168,7 +170,7 @@ def dashboard(request):
     return render(request,"authentication/dashboard.html",context)
    
 
-    
+@login_required(login_url='signin')  
 def dashboard_water(request):
     context={}
     user=User.objects.all()
@@ -176,6 +178,7 @@ def dashboard_water(request):
     context["Complaints"]=Complaint.objects.filter(name=request.user,cname='Water')     
     return render(request,"authentication/dashboard_topic.html",context)
 
+@login_required(login_url='signin')
 def dashboard_light(request):
     context={}
     user=User.objects.all()
@@ -183,6 +186,7 @@ def dashboard_light(request):
     context["Complaints"]=Complaint.objects.filter(name=request.user,cname='Light')        
     return render(request,"authentication/dashboard_topic.html",context)
 
+@login_required(login_url='signin')
 def dashboard_clean(request):
     context={}
     user=User.objects.all()
@@ -190,6 +194,7 @@ def dashboard_clean(request):
     context["Complaints"]=Complaint.objects.filter(name=request.user,cname='Clean')    
     return render(request,"authentication/dashboard_topic.html",context)
 
+@login_required(login_url='signin')
 def dashboard_other(request):
     context={}
     user=User.objects.all()
@@ -197,7 +202,7 @@ def dashboard_other(request):
     context["Complaints"]=Complaint.objects.filter(name=request.user,cname='Other')    
     return render(request,"authentication/dashboard_topic.html",context)
 
-
+@login_required(login_url='signin')
 def contactus(request):
         form = ContactusForm()
         if request.method == "POST":
@@ -210,7 +215,8 @@ def contactus(request):
         user=User.objects.all()
         context["users"]=user        
         return render(request,"authentication/contactus.html",context)
-   
+
+@login_required(login_url='signin')   
 def account(request,pk):
         if request.user.is_authenticated:
             name=request.user
@@ -220,7 +226,7 @@ def account(request,pk):
         else:
             return redirect('/')        
     
-
+@login_required(login_url='signin')
 def form(request):
     if request.method == "POST":
         name=request.POST.get('name')
@@ -231,6 +237,7 @@ def form(request):
         data.save()
     return render(request,"authentication/index.html")
 
+@login_required(login_url='signin')
 def complaintform(request):
     if request.method == "POST":
             name=request.user
@@ -263,11 +270,13 @@ def no(request,pk):
     t.save()
     return redirect("/admins") 
 
+@login_required(login_url='signin')
 def query(request):
     context={}
     context["Contactus"]=Contactus.objects.all()    
     return render(request,"authentication/query.html",context)
 
+@login_required(login_url='signin')
 def oldcomplaints(request):
     context={}
     context["Complaints_Old"]=Complaint.objects.filter(status="Accepted") | Complaint.objects.filter(status="Rejected")        
