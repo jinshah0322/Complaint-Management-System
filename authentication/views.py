@@ -12,6 +12,7 @@ from django.contrib.auth import login, logout
 from cms import settings
 from authentication.models import Complaint
 from authentication.models import Contactus
+from authentication.models import SignupFields
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
 from django.contrib.sites.shortcuts import get_current_site
@@ -28,61 +29,70 @@ from .forms import *
 
 
 def signup(request):
-     if request.method == "POST":
-            name=request.POST.get('Name')
-            number=request.POST.get('number')
-            email=request.POST.get('email')
-            address=request.POST.get('address')
-            age=request.POST.get('age')
-            password=request.POST['password']
-            confirm_password=request.POST['confirm_password']
-            if User.objects.filter(name=name):
-                messages.error(request,"Username already exists",extra_tags="validation")
-                return redirect('/signup')
+    if request.method == "POST":
+        Name=request.POST['Name']
+        email=request.POST['email']
+        password=request.POST['password']
+        confirm_password=request.POST['confirm_password']
 
-            if User.objects.filter(mail=email):
-                messages.error(request,"Email already exists",extra_tags="validation")
-                return redirect('/signup')
+        if User.objects.filter(username=Name):
+            messages.error(request,"Username already exists",extra_tags="validation")
+            return redirect('/signup')
 
-            if password != confirm_password:
-                messages.error(request,"Password does not match",extra_tags="validation")
-                return redirect('/signup')
+        if User.objects.filter(email=email):
+            messages.error(request,"Email already exists",extra_tags="validation")
+            return redirect('/signup')
 
-            if not name.isalnum():
-                messages.error(request,"Username should only contain letters and numbers",extra_tags="validation")
-                return redirect('/signup')
-                
-            data=User(name=name,password=password,mail=email,number=number,address=address,age=age)
-            data.save()
-            messages.success(request,"Your account has been successfully created Check mail to verify.",extra_tags="valid")
-            #welcome email
-            subject = "Welcome to Complaint Management System"
-            message = "Hi "+data.name+"! Welcome to Complaint Management System!!!.\n We are glad to have you here!!!.\nWe have sent you a confirmation email to "+data.mail+".\nPlease confirm your email to continue using our services.\n\nThank You!!!"
-            from_email = settings.EMAIL_HOST_USER
-            to_list = [data.mail]
-            send_mail(subject, message, from_email, to_list, fail_silently=True)
+        if password != confirm_password:
+            messages.error(request,"Password does not match",extra_tags="validation")
+            return redirect('/signup')
 
-            # #confirmation email
-            current_site = get_current_site(request)
-            email_subject = "Confirm your email"
-            message2 = render_to_string('email_confirmation.html', {
-                'name': data.first_name,
-                'domain': current_site.domain,
-                'uid': urlsafe_base64_encode(force_bytes(data.pk)),
-                'token': generate_token.make_token(data)
-            })
-            email = EmailMessage(
-                email_subject,
-                message2,
-                settings.EMAIL_HOST_USER,
-                [data.email]
-            )
-            email.fail_silently = True
-            email.send()
+        if not Name.isalnum():
+            messages.error(request,"Username should only contain letters and numbers",extra_tags="validation")
+            return redirect('/signup')
 
-            return redirect('/')
+        myuser=User.objects.create_user(Name, email, password)
+        myuser.first_name=Name  
+        myuser.email=email
+        myuser.is_active = False
+        myuser.save()
+        address=request.POST.get('address')
+        number=request.POST.get('number')
+        age=request.POST.get('age')
+        data1=SignupFields(name=Name,address=address,number=number,age=age)
+        data1.save()                    
 
-     return render(request,"authentication/signup.html")
+        messages.success(request,"Your account has been successfully created Check mail to verify.",extra_tags="valid")
+
+        #welcome email
+        subject = "Welcome to Complaint Management System"
+        message = "Hi "+myuser.first_name+"! Welcome to Complaint Management System!!!.\n We are glad to have you here!!!.\nWe have sent you a confirmation email to "+myuser.email+".\nPlease confirm your email to continue using our services.\n\nThank You!!!"
+        from_email = settings.EMAIL_HOST_USER
+        to_list = [myuser.email]
+        send_mail(subject, message, from_email, to_list, fail_silently=True)
+
+        #confirmation email
+        current_site = get_current_site(request)
+        email_subject = "Confirm your email"
+        message2 = render_to_string('email_confirmation.html', {
+            'name': myuser.first_name,
+            'domain': current_site.domain,
+            'uid': urlsafe_base64_encode(force_bytes(myuser.pk)),
+            'token': generate_token.make_token(myuser)
+        })
+        email = EmailMessage(
+            email_subject,
+            message2,
+            settings.EMAIL_HOST_USER,
+            [myuser.email]
+        )
+        email.fail_silently = True
+        email.send()
+
+        return redirect('/')
+
+    return render(request,"authentication/signup.html")
+
 
 def signin(request):
     if(request.method=="POST"):
@@ -101,7 +111,6 @@ def signin(request):
             validate = User.objects.filter(username=Name).exists()  
             if validate:
                 messages.error(request,"Invalid Password",extra_tags="pass")
-
                 return redirect('/')
             else:
                 messages.error(request,"Invalid Username",extra_tags="user")
@@ -130,7 +139,9 @@ def activate(request, uidb64, token):
         return render(request, 'activation_failed.html')
 
 def home(request):
-    return render(request,"authentication/index.html") 
+    user=User.objects.all()
+    context={"user":user}
+    return render(request,"authentication/index.html",context) 
     
     
 def complaint(request):
@@ -188,9 +199,14 @@ def contactus(request):
         context = {'form':form}
         return render(request,"authentication/contactus.html",context)
    
-def account(request):
+def account(request,pk):
         if request.user.is_authenticated:
-            return render(request,"authentication/account.html")
+            user=User.objects.get(id=pk) 
+            name=user.username
+            user1=SignupFields.objects.filter(name=name)   
+            print(user1)          
+            context={"users":user1}      
+            return render(request,"authentication/account.html",context)
         else:
             return redirect('/')        
     
