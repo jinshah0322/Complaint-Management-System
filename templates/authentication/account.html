@@ -28,21 +28,17 @@
             </button> <a class="navbar-brand" href="/home"
                 style="letter-spacing:0px;margin-left:100px !important;"><img src="../../static/images/logo-nav.png" style="width:50px;height:50px; "></a>
 
-
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-
-
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
-
-
-
-                    <a class="nav-link" href="/home">Home</a>
-                    <a class="nav-link" href="/dashboard">Dashboard</a>
-                    <a class="nav-link" href="/contactus">Contact Us</a>
-                    <a class="nav-link active" href="/account">Account</a>
-                    <a class="nav-link" href="/signout">Logout</a>
-                </ul>
-            </div>
+                {% for i in users %}
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <a class="nav-link" href="/home">Home</a>
+                        <a class="nav-link" href="/dashboard">Dashboard</a>
+                        <a class="nav-link" href="/contactus">Contact Us</a>
+                        <a class="nav-link active" href="{% url 'account' i.id %}">Account</a>
+                        <a class="nav-link" href="/signout">Logout</a>
+                    </ul>
+                </div>
+    {% endfor %}
         </div>
     </nav>
     <br><br>
@@ -87,12 +83,13 @@
                     </div>
                   </div>
                   <hr>
+                  {% for i in users %}
                   <div class="row">
                     <div class="col-sm-3">
                       <p class="mb-0">Mobile</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">{{users.number}}</p>
+                      <p class="text-muted mb-0">{{i.number}}</p>
                     </div>
                   </div>               
                   <hr>
@@ -101,7 +98,7 @@
                       <p class="mb-0">Age</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">{{users.age}}</p>
+                      <p class="text-muted mb-0">{{i.age}}</p>
                     </div>
                   </div> 
                   <hr>
@@ -110,9 +107,10 @@
                       <p class="mb-0">Address</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">{{users.address}}</p>
+                      <p class="text-muted mb-0">{{i.address}}</p>
                     </div>
                   </div> 
+                  {% endfor %}
                 </div>
               </div>
               </div>
