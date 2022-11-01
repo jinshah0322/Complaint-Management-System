@@ -7,18 +7,7 @@ from django.contrib.auth.models import User
 from cms import settings
 
 # Create your models here.
-class Users(models.Model):
-    name = models.CharField(max_length=100,null=True)
-    password = models.CharField(max_length=100)
-    repassword=models.CharField(max_length=100)
-    mail = models.EmailField(max_length=100)
-    number = models.CharField(max_length=100)
-    address=models.CharField(max_length=100)
-    age=models.IntegerField()
 
-    def __str__(self):
-        return  self.name,self.password,self.repassword,self.mail,self.number,self.address,self.age
-    
 class Complaint(models.Model):
     name = models.CharField(max_length=100,null=True)
     cname = models.CharField(max_length=100)

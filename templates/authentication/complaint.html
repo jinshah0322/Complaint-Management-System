@@ -15,8 +15,12 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="../../static/css/style.css">
     <link rel="stylesheet" type="text/css" href="../../static/css/complaint.css">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;700;800;900&display=swap" rel="stylesheet">    <link rel="icon" href="../../static/images/favicon.png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="icon" href="../../static/images/favicon.png">
 
 
     <link rel="icon" href="../../static/images/favicon.png">
@@ -31,17 +35,12 @@
                 data-mdb-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <i class="fas fa-bars"></i>
-            </button> <a class="navbar-brand" href="/home"
-                style="letter-spacing:0px;margin-left:100px !important;"><img src="../../static/images/logo-nav.png" style="width:50px;height:50px; "></a>
+            </button> <a class="navbar-brand" href="/home" style="letter-spacing:0px;margin-left:100px !important;"><img
+                    src="../../static/images/logo-nav.png" style="width:50px;height:50px; "></a>
 
 
             <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-
-
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
-
-
-
                     <a class="nav-link active" href="/home">Home</a>
                     <a class="nav-link" href="/dashboard">Dashboard</a>
                     <a class="nav-link" href="/contactus">Contact Us</a>
@@ -56,46 +55,45 @@
         <img src="../../static/images/banner.webp" style="width:100%;height:250px;">
     </div>
     <br><br>
-<div class="heading">
-    <h1><b>File a Complaint</b></h1>
-</div>
-<br><br><br><br><br><br><br>
+    <div class="heading">
+        <h1><b>File a Complaint</b></h1>
+    </div>
+    <br><br><br><br><br><br><br>
     <form class="col-md-4" method="POST" action="{% url 'complaintform' %}">
         {% csrf_token %}
 
         <!-- Email input -->
         <div class="form-outline mb-4">
-          <input type="text" id="form1Example1" name="cname" class="form-control" autocomplete="off" />
-          <label class="form-label" for="form1Example1">Complaint Name</label>
+            <input type="text" id="form1Example1" name="cname" class="form-control" autocomplete="off" />
+            <label class="form-label" for="form1Example1">Complaint Name</label>
         </div>
         <div class="form-outline mb-4">
-            <input type="text" id="form1Example1" name="cdesc" class="form-control" autocomplete="off"/>
+            <input type="text" id="form1Example1" name="cdesc" class="form-control" autocomplete="off" />
             <label class="form-label" for="form1Example1">Complaint Description</label>
-          </div>
-            <div class="form-outline mb-4">
-                <label class="form-label" for="form1Example1"><b>Priority Of Complaint</b></label><br>
+        </div>
+        <div class="form-outline mb-4">
+            <label class="form-label" for="form1Example1"><b>Priority Of Complaint</b></label><br>
 
             <input type="radio" id="html" name="priority" value="High">&nbsp;High&nbsp;&nbsp;
             <input type="radio" id="html" name="priority" value="Moderate">&nbsp;Medium
-&nbsp;&nbsp;            <input type="radio" id="html" name="Priority" value="low">&nbsp;Low
-            
+            &nbsp;&nbsp; <input type="radio" id="html" name="priority" value="Low">&nbsp;Low
 
-            </div>
-          <div class="form-outline mb-4">
-            <input type="date" id="form1Example1" name="date" class="form-control" autocomplete="off"/>
+
+        </div>
+        <div class="form-outline mb-4">
+            <input type="date" id="form1Example1" name="date" class="form-control" autocomplete="off" />
             <label class="form-label" for="form1Example1">Enter Date</label>
-          </div>
-      
-        <!-- 2 column grid layout for inline styling -->
-        
+        </div>
+
+
         <!-- Submit button -->
-        <a href="/dashboard/dashboard_topic"> 
+        <a href="/dashboard/dashboard_topic">
             <button type="submit" class="btn btn-primary btn-block">File Complaint</button>
         </a>
         <br><br><br><br>
-      </form>
+    </form>
 
-  
+
 </body>
 <script src="bootstrap/js/jquery-3.3.1.min.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>

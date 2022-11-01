@@ -18,6 +18,9 @@ urlpatterns = [
     path('account',views.account,name='account'),
     path('contactform',views.form,name='form'),
     path('complaintform',views.complaintform,name='complaintform'),
-
-
+    path('admins',views.admin,name='admin'),
+    path('yes/<str:pk>',views.yes,name='yes'),
+    path('no/<str:pk>',views.no,name='no'),
+    path('query',views.query,name='query'),
+    path('oldcomplaints',views.oldcomplaints,name='oldcomplaints'),
 ]

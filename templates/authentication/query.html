@@ -1,25 +1,32 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" , initial-scale="1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Dashboard - Complaint Management</title>
-    <script src="https://kit.fontawesome.com/36a2be57d1.js" crossorigin="anonymous"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css" rel="stylesheet" />
+    <title>Queries - Complaint Management</title>
     <link rel="stylesheet" type="text/css" href="../../static/css/style.css">
-    <link rel="stylesheet" type="text/css" href="../../static/css/dash.css">
+    <script src="https://kit.fontawesome.com/93671c7894.js" crossorigin="anonymous"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;700;800;900&display=swap" rel="stylesheet">    <link rel="icon" href="../../static/images/favicon.png">
 <style>
-    th{
+    td b{
         color: #000 !important;
+    }
+    @media screen and (min-width:900px) {
+        .home-nav{
+            margin-left: 250px !important;
+        }
+        td{
+            padding-left: 6vw !important;
+        }
     }
 </style>
 </head>
 
 <body>
-
     <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
@@ -27,47 +34,43 @@
                 aria-label="Toggle navigation">
                 <i class="fas fa-bars"></i>
             </button> <a class="navbar-brand" href="/home"
-                style="letter-spacing:0px;margin-left:100px !important;"><img src="../../static/images/logo-nav.png" style="width:50px;height:50px; "></a>
+                style="letter-spacing:0px;margin-left:100px !important;;"><img src="../../static/images/logo-nav.png" style="width:50px;height:50px; "> </a>
+
+
             <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">                    
-                    <a class="nav-link" href="/home">Home</a>
-                    <a class="nav-link active" href="/dashboard">Dashboard</a>
-                    <a class="nav-link" href="/contactus">Contact Us</a>
-                    <a class="nav-link" href="/account">Account</a>
+
+
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                   <a class="nav-link home-nav" href="/admins">Home</a>
+                   <a class="nav-link" href="/oldcomplaints">Old Complaints</a>
+                    <a class="nav-link active" href="/query">Queries</a> 
                     <a class="nav-link" href="/signout">Logout</a>
                 </ul>
             </div>
         </div>
-    </nav>
-    <br><br><br>
-    <div>
-        <img src="../../static/images/banner.webp" style="width:100%;height:250px;">
-    </div>
-    <br><br>
-<div class="heading">
-    <h1><b>Complaint Description</b></h1>
-</div><br><br><br><br>
+    </nav><br><br><br><br>
+
 <table class="table">
-    <thead>
-        <th><b>Sr No</b></th>
-        <th><b>Complaint Type</b></th>
-        <th><b>Complaint Description</b></th>
-        <th><b>Date</b></th>
-        <th><b>Status</b></th>
-    </thead>
-    {%for i in Complaints%}
     <tr>
-        <td>{{ i.id }}
-
-
+        <td><b>Sr No</b></td>
+        <td><b>Name</b></td>
+        <td><b>Phone Number</b></td>
+        <td><b>Email</b></td>
+        <td><b>Message</b></td>
+    </tr>
+    {%for p in Contactus%}
+    <tr>
+        <td>{{p.id}}</td>
+        <td>  {{p.name}}
         </td>
-        <td>  {{i.cname}}
+        <td>  {{p.number}}
         </td>
-        <td>  {{i.cdescription}}
+        <td>  {{p.mail}}
         </td>
-        <td>  {{i.date}}
+        <td>
+            {{p.message}}
         </td>
-        <td><b id="demo" style="color:blue">{{i.status}}</b></td>
+       
     </tr>
     {% endfor %}
 
@@ -76,14 +79,5 @@
 <script src="bootstrap/js/jquery-3.3.1.min.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
-<script>
-    var a=document.getElementById("demo").innerHTML
-    if(a=="Rejected"){
-    document.getElementById("demo").style.color = "Red"
-}    
-    if(a=="Accepted"){
-        document.getElementById("demo").style.color = "Green"}    
 
-
-</script>
 </html>
