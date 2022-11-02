@@ -249,28 +249,30 @@ def complaintform(request):
             date=request.POST.get('date')
             data=Complaint(name=name,cname=cname,cdescription=desc,priority=priority,date=date)
             data.save()
+            return redirect("/home") 
     return render(request,"authentication/index.html")    
 
+@login_required(login_url='signin')
 def admin(request):
     context={}
     context["Complaints"]=Complaint.objects.filter(status="In Process")    
     context["Users"]=User.objects.filter().count()-1
     context["Total_Complaints"]=Complaint.objects.filter().count()  
     context["Total_Completed_Complaints"]=Complaint.objects.filter(status="Accepted").count() + Complaint.objects.filter(status="Rejected").count() 
-    context["Remaining_Complaints"]=Complaint.objects.filter().count()-Complaint.objects.filter(status="Rejected").count()-Complaint.objects.filter(status="Accepted").count() 
+    context["Remaining_Complaints"]=Complaint.objects.filter().count()-Complaint.objects.filter(status="Rejected").count()-Complaint.objects.filter(status="Accepted").count()    
     return render(request,"authentication/admin.html",context)
 
-def yes(pk):
+def yes(request,pk):
     t = Complaint.objects.get(id=pk)
     t.status = 'Accepted' 
     t.save()
-    return redirect("/admins") 
+    return redirect('/admins',extra_tags="yes")        
 
-def no(pk):
+def no(request,pk):
     t = Complaint.objects.get(id=pk)
     t.status = 'Rejected' 
     t.save()
-    return redirect("/admins") 
+    return redirect('/admins',extra_tags="no")        
 
 @login_required(login_url='signin')
 def query(request):

@@ -117,10 +117,11 @@ style="display: flex; margin-left: 3vw; background: #2D8B70; width: 22%; padding
         <td>
             {{p.status}}
         </td>
-        <td style="display:flex;"><form method="POST" action="{% url 'yes' p.id%}">{% csrf_token %}
-            <button type="submit" class="btn btn-success"><i class="fas fa fa-check"></i></button></form>&nbsp;&nbsp;&nbsp;
-            <form method="POST" action="{% url 'no' p.id%}">{% csrf_token %}
-            <button type="submit" class="btn btn-danger"><i class="fa-solid fa-xmark"></i></button></td>
+        <td><form method="POST" action="{% url 'yes' p.id%}">{% csrf_token %}
+            <button type="submit" class="btn btn-success"><i class="fas fa fa-check"></i></button></form></td>
+            
+            <td><form method="POST" action="{% url 'no' p.id%}">{% csrf_token %}
+                <button type="submit" class="btn btn-xmark"><i class="fas fa fa-check"></i></button></form></td>
     </tr>
     {% endfor %}
 

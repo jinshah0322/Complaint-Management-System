@@ -68,7 +68,10 @@
         </td>
         <td>  {{i.date}}
         </td>
-        <td><b id="demo" style="color:blue">{{i.status}}</b></td>
+        <td>
+           
+            {{i.status}}</b></td>
+             
     </tr>
     {% endfor %}
 
@@ -77,14 +80,5 @@
 <script src="bootstrap/js/jquery-3.3.1.min.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
-<script>
-    var a=document.getElementById("demo").innerHTML
-    if(a=="Rejected"){
-    document.getElementById("demo").style.color = "Red"
-}    
-    if(a=="Accepted"){
-        document.getElementById("demo").style.color = "Green"}    
 
-
-</script>
 </html>
