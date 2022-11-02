@@ -68,9 +68,13 @@
         </td>
         <td>  {{i.date}}
         </td>
-        <td>
-           
-            {{i.status}}</b></td>
+            {% if i.status == 'Accepted'%}
+            <td style="color:green;">{{i.status}}</b</td>
+            {% elif i.status == 'Rejected' %}
+            <td style="color:red;">{{i.status}}</b</td>
+            {% else %}
+            <td>{{i.status}}</b</td>
+            {% endif %}
              
     </tr>
     {% endfor %}

@@ -237,6 +237,7 @@ def form(request):
         message=request.POST.get('message')
         data=Contactus(name=name,number=number,mail=email,message=message)
         data.save()
+        return redirect("/home") 
     return render(request,"authentication/index.html")
 
 @login_required(login_url='signin')
