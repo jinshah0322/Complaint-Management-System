@@ -15,6 +15,16 @@
     th{
         color: #000 !important;
     }
+    td b{
+        margin-left:4vw !important;
+    }
+
+    .next b{
+        font-weight:500 !important;
+    }
+    tr:nth-child(1){
+        color:#000 !important;
+    }
 </style>
 </head>
 
@@ -49,29 +59,29 @@
 
     <h1><b>Complaint Description </div><br><br><br><br>
 <table class="table">
-    <thead>
-        <th><b>Sr No</b></th>
-        <th><b>Complaint Type</b></th>
-        <th><b>Complaint Description</b></th>
-        <th><b>Date</b></th>
-        <th><b>Status</b></th>
-    </thead>
-    {%for i in Complaints%}
     <tr>
-        <td>{{ i.id }}
+        <td><b>Sr No</b></td>
+        <td><b>Complaint Type</b></td>
+        <td><b>Complaint Description</b></td>
+        <td><b>Date</b></td>
+        <td><b>Status</b></td>
+    </tr>
+    {%for i in Complaints%}
+    <tr class="next">
+        <td class="td"><b>{{ i.id }}
 
 
         </td>
-        <td>  {{i.cname}}
+        <td> <b> {{i.cname}}</b>
         </td>
-        <td>  {{i.cdescription}}
+        <td>  <b>{{i.cdescription}}</b>
         </td>
-        <td>  {{i.date}}
+        <td><b>  {{i.date}}</b>
         </td>
             {% if i.status == 'Accepted'%}
-            <td style="color:green;">{{i.status}}</b</td>
+            <td style="color:green;"><b>{{i.status}}</b></td>
             {% elif i.status == 'Rejected' %}
-            <td style="color:red;">{{i.status}}</b</td>
+            <td style="color:red;"><b>{{i.status}}</b></td>
             {% else %}
             <td>{{i.status}}</b</td>
             {% endif %}             
