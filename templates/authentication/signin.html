@@ -54,6 +54,7 @@
   </head>
 
   <body>
+
     <!--NAVBAR-->
     <br /><br /><br />
     <section class="h-100" style="margin-top: -70px">
@@ -88,23 +89,23 @@
 
                     {% for message in messages %}
                       {%if "valid" in message.tags %}
-                        <p class="messages"><h1 style="color: green !important;
+                        <p class="messages" onLoad="play()"><h1 style="color: green !important;
                           font-size: 17px !important;text-align:center;">{{message}}</h1></p>
                       {%endif%}
 				            {% endfor %}
 
-                    <form action="/" method="post">
+                    <form action="/" method="post" name="f1">
                       {% csrf_token %}
                       {% for message in messages %}
                         {%if "user" in message.tags %}
-                          <p class="messages"><h1 style="color: red !important;
+                          <p class="messages"><h1 id="error" style="color: red !important;
                             font-size: 17px !important;">{{message}}</h1></p>
                         {%endif%}
                       {% endfor %}
                       <div class="form-outline mb-4">
                         <input
                           type="text"
-                          id="form2Example11"
+                          id="form2Example11 one"
                           class="form-control"
                           placeholder="Enter Username"
                           name="Name"
@@ -118,7 +119,7 @@
 
                       {% for message in messages %}
                         {%if "pass" in message.tags %}
-                          <p class="messages"><h1 style="color: red !important;
+                          <p class="messages"><h1 id="error" style="color: red !important;
                             font-size: 17px !important;">{{message}}</h1></p>
                         {%endif%}
                       {% endfor %}
@@ -126,7 +127,7 @@
                       <div class="form-outline mb-4">
                         <input
                           type="password"
-                          id="form2Example22"
+                          id="form2Example22 two"
                           class="form-control"
                           name="Password"
                           placeholder="Enter Password"
@@ -140,13 +141,13 @@
                       
                       <button
                         type="submit"
-                        class="btn"
+                        class="btn" id="button"
                         style="
                           color: #fff;
                           margin-left: 100px;
                           width: 130px;
                           background: #2d8b72;
-                        "
+                        " onclick="play()"
                       >
                         Login
                       </button>                  
@@ -176,5 +177,5 @@
     type="text/javascript"
     src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"
   ></script>
-  <script></script>
+
 </html>

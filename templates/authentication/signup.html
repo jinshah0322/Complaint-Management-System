@@ -80,7 +80,7 @@
                                         {% csrf_token %}
                                         {% for message in messages %}
                                         {%if "validation" in message.tags %}
-                                        <p class="messages"><h1 style="color: tomato !important;
+                                        <p class="messages"><h1 id="error" style="color: tomato !important;
                                         font-size: 17px !important;">{{message}}</h1></p>
                                         {%endif%}
 				                        {% endfor %}
@@ -123,7 +123,7 @@
                                         </div>
 
 
-                                        <button type="submit" class="btn"
+                                        <button type="submit" class="btn" id="button"
                                             style="color: #fff;margin-left:97px;width:130px;background: #2d8b72;">Sign up</button>
                                         </a>    
 
